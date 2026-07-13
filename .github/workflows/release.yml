@@ -1,0 +1,97 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    name: Build & publish release artifacts
+    runs-on: macos-15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches Version.swift
+        run: |
+          SRC_VERSION="$(grep -o '"[0-9]*\.[0-9]*\.[0-9]*"' Sources/rcodexpdf/Support/Version.swift | tr -d '"' | head -1)"
+          if [[ "$SRC_VERSION" != "${{ steps.version.outputs.version }}" ]]; then
+            echo "::error::Tag v${{ steps.version.outputs.version }} does not match Version.swift ($SRC_VERSION)"
+            exit 1
+          fi
+
+      # Optional: if repository secrets for a Developer ID certificate are configured, import
+      # it into a temporary keychain so the build is signed with a real identity instead of
+      # ad-hoc. Safe to leave these secrets unset for a community/unsigned release.
+      - name: Import signing certificate (optional)
+        if: ${{ env.HAS_CERT == 'true' }}
+        env:
+          HAS_CERT: ${{ secrets.MACOS_CERTIFICATE != '' }}
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          KEYCHAIN_PWD: ${{ secrets.KEYCHAIN_PWD }}
+        run: |
+          echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+          security create-keychain -p "$KEYCHAIN_PWD" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "$KEYCHAIN_PWD" build.keychain
+          security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PWD" build.keychain
+          rm certificate.p12
+
+      - name: Build app bundle
+        env:
+          CODESIGN_IDENTITY: ${{ secrets.CODESIGN_IDENTITY != '' && secrets.CODESIGN_IDENTITY || '-' }}
+        run: ./Scripts/build-app.sh
+
+      - name: Build DMG
+        run: ./Scripts/make-dmg.sh
+
+      - name: Build PKG
+        env:
+          INSTALLER_SIGN_IDENTITY: ${{ secrets.INSTALLER_SIGN_IDENTITY || '' }}
+        run: ./Scripts/make-pkg.sh
+
+      - name: Build ZIP
+        run: ./Scripts/make-zip.sh
+
+      - name: Build source archive
+        run: ./Scripts/make-source-archive.sh
+
+      # Optional: notarize if Apple credentials are configured as secrets.
+      - name: Notarize (optional)
+        if: ${{ env.HAS_NOTARY == 'true' }}
+        env:
+          HAS_NOTARY: ${{ secrets.NOTARY_APPLE_ID != '' }}
+        run: |
+          xcrun notarytool store-credentials "rcodexpdf-notary" \
+            --apple-id "${{ secrets.NOTARY_APPLE_ID }}" \
+            --team-id "${{ secrets.NOTARY_TEAM_ID }}" \
+            --password "${{ secrets.NOTARY_PASSWORD }}"
+          ./Scripts/notarize.sh dist/rCodexPDF-${{ steps.version.outputs.version }}.dmg
+          ./Scripts/notarize.sh dist/rCodexPDF-${{ steps.version.outputs.version }}.pkg
+
+      - name: List artifacts
+        run: ls -la dist
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: rCodexPDF v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          files: |
+            dist/rCodexPDF-${{ steps.version.outputs.version }}.dmg
+            dist/rCodexPDF-${{ steps.version.outputs.version }}.pkg
+            dist/rCodexPDF-${{ steps.version.outputs.version }}-macOS.zip
+            dist/rCodexPDF-${{ steps.version.outputs.version }}-source.tar.gz

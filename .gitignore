@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+.swiftpm/
+*.xcodeproj
+*.xcworkspace
+DerivedData/
+dist/
+build/
+*.dmg
+*.pkg
+*.zip
+.env
+*.log
+xcuserdata/
+.vscode/

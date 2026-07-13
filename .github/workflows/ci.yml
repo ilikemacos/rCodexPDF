@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test (macOS)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Swift version
+        run: swift --version
+
+      - name: Cache SwiftPM dependencies
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      - name: Build (debug)
+        run: swift build -v
+
+      - name: Run tests
+        run: swift test -v
+
+      - name: Build release binaries (host arch)
+        run: swift build -c release
+
+  lint-shell-scripts:
+    name: Shellcheck installer & packaging scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Shellcheck
+        run: |
+          shellcheck -S warning install.sh
+          shellcheck -S warning Scripts/*.sh
+
+  build-app-bundle:
+    name: Build .app bundle (smoke test)
+    runs-on: macos-15
+    needs: build-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+      - name: Build app bundle (host arch only, unsigned)
+        env:
+          SKIP_UNIVERSAL: "1"
+          CODESIGN_IDENTITY: "-"
+        run: ./Scripts/build-app.sh
+      - name: Verify bundle structure
+        run: |
+          test -f "dist/rCodexPDF.app/Contents/MacOS/RCodexPDF"
+          test -f "dist/rCodexPDF.app/Contents/Resources/AppIcon.icns"
+          test -f "dist/rCodexPDF.app/Contents/Info.plist"
+          test -x "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf"
+          echo "Bundle structure OK"
+      - name: Smoke-test CLI
+        run: |
+          "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf" --help
+          "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf" --version

@@ -1,0 +1,20 @@
+# Changelog
+
+All notable changes to rCodexPDF are documented in this file.
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project uses [Semantic Versioning](https://semver.org/).
+
+## [1.0.0] - 2026-07-13
+
+### Added
+- Initial public release.
+- **PDF viewer**: PDFKit-based rendering, tabs, zoom/rotate/fullscreen, full-text search with highlighting, text selection & copy, printing, thumbnail and outline/bookmark sidebars, password-protected PDF support, drag & drop, recent files, remembers last page per document, light/dark mode.
+- **Code editor & compiler**: syntax highlighting, line numbers, bracket matching, code folding, minimap, keyword/identifier autocomplete, find & replace, multi-tab editing, auto-save, format-on-demand. Compile & run support for C, C++, Rust, Go, Python, Java, JavaScript, TypeScript, Swift, Kotlin, C#, PHP, Ruby, and Bash, with a live build output panel, parsed compiler diagnostics, and Run/Stop controls.
+- **AI chat assistant**: Claude, ChatGPT, Gemini, OpenRouter, Grok, Hermes, and Llama providers with streaming responses, Markdown + syntax-highlighted code rendering, Keychain-backed API key storage, conversation history with search, Markdown/JSON export and import, and token usage/cost tracking.
+- **CLI (`rcodexpdf`)**: `open`, `pdf`, `compile`, `chat`, `config`, `update`, `uninstall` commands; colored output; Bash/Zsh completion generation; structured logging to `~/Library/Application Support/rCodexPDF` and `~/Library/Logs/rCodexPDF`.
+- **Installation**: `install.sh` one-line installer (architecture detection, dependency checks, PATH setup, update/uninstall support), plus DMG, PKG, and ZIP distribution artifacts.
+- **CI/CD**: GitHub Actions build/test/shellcheck on every PR, tag-triggered release workflow producing DMG/PKG/ZIP/source archive with optional code signing and notarization.
+
+### Known limitations
+- No multi-file project/workspace build support yet (single source file compile & run only).
+- Code completion is keyword + in-buffer-identifier based, not a full language server.
+- Lua is intentionally not supported.

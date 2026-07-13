@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      rCodexPDF ships outside the Mac App Store and is NOT sandboxed: the code editor's
+      compiler/run feature must be able to spawn arbitrary developer toolchains (clang, rustc,
+      go, python3, javac, node, swiftc, kotlinc, dotnet, php, ruby, bash) as child processes,
+      which App Sandbox does not permit. It still runs under the Hardened Runtime.
+    -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+    <key>com.apple.security.network.server</key>
+    <false/>
+    <key>com.apple.security.cs.allow-jit</key>
+    <false/>
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <false/>
+    <key>com.apple.security.cs.disable-library-validation</key>
+    <false/>
+</dict>
+</plist>
