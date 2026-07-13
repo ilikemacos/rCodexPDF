@@ -24,7 +24,7 @@ Re-running the same command updates an existing install in place.
 Useful flags (pass after `bash -s --`):
 ```bash
 curl -fsSL .../install.sh | bash -s -- --from-source     # build locally instead of downloading
-curl -fsSL .../install.sh | bash -s -- --version 1.0.0    # install a specific version
+curl -fsSL .../install.sh | bash -s -- --version 1.1.0    # install a specific version
 curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
 ```
 

@@ -25,14 +25,14 @@ If Homebrew reports permission errors on `/opt/homebrew`, run `sudo chown -R "$(
 
 Each release includes an **App ZIP** (with `rCodexPDF.app`), **PKG**, **DMG**, and a **source archive**.
 
-### v1.0.0
+### v1.1.0
 
 | Format | File |
 |--------|------|
-| **App ZIP** | [rCodexPDF-1.0.0-macOS.zip](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-macOS.zip) |
-| **PKG** | [rCodexPDF-1.0.0.pkg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.pkg) |
-| **DMG** | [rCodexPDF-1.0.0.dmg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.dmg) |
-| **Source** | [rCodexPDF-1.0.0-source.tar.gz](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-source.tar.gz) |
+| **App ZIP** | [rCodexPDF-1.1.0-macOS.zip](https://github.com/chopsticks/rCodexPDF/releases/download/v1.1.0/rCodexPDF-1.1.0-macOS.zip) |
+| **PKG** | [rCodexPDF-1.1.0.pkg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.1.0/rCodexPDF-1.1.0.pkg) |
+| **DMG** | [rCodexPDF-1.1.0.dmg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.1.0/rCodexPDF-1.1.0.dmg) |
+| **Source** | [rCodexPDF-1.1.0-source.tar.gz](https://github.com/chopsticks/rCodexPDF/releases/download/v1.1.0/rCodexPDF-1.1.0-source.tar.gz) |
 
 [All releases →](https://github.com/chopsticks/rCodexPDF/releases)
 
