@@ -28,7 +28,16 @@ curl -fsSL .../install.sh | bash -s -- --version 1.0.0    # install a specific v
 curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
 ```
 
-## Option 2: DMG
+## Option 2: Homebrew
+
+```bash
+brew tap ilikemacos/rcodexpdf
+brew install rcodexpdf
+```
+
+Installs `rCodexPDF.app` (to `/Applications` or `~/Applications`) and the real `rcodexpdf` CLI with shell completions. If Homebrew reports a permission error on `/opt/homebrew`, run `sudo chown -R "$(whoami)" /opt/homebrew/Cellar /opt/homebrew/Library` and retry, or use the tap's [install.sh](https://github.com/ilikemacos/homebrew-rcodexpdf/blob/main/install.sh) instead (same result, no Homebrew required).
+
+## Option 3: DMG
 
 1. Download `rCodexPDF-X.Y.Z.dmg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
 2. Open it and drag `rCodexPDF.app` to `Applications`.
@@ -37,12 +46,12 @@ curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
    sudo cp /Applications/rCodexPDF.app/Contents/Resources/bin/rcodexpdf /usr/local/bin/rcodexpdf
    ```
 
-## Option 3: PKG
+## Option 4: PKG
 
 1. Download `rCodexPDF-X.Y.Z.pkg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
 2. Double-click and follow the installer. This installs both the app **and** the CLI (with shell completions) in one step — no manual PATH setup needed.
 
-## Option 4: ZIP
+## Option 5: ZIP
 
 Download `rCodexPDF-X.Y.Z-macOS.zip`, unzip, and move `rCodexPDF.app` to `/Applications` yourself. The CLI binary is at `Contents/Resources/bin/rcodexpdf` inside the bundle, same as the DMG.
 
