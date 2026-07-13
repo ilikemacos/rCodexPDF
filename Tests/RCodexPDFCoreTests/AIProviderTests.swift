@@ -21,9 +21,9 @@ final class AIProviderRegistryTests: XCTestCase {
         }
     }
 
-    func testCostEstimation() {
+    func testCostEstimation() throws {
         let provider = AIProviderRegistry.chatgpt
-        let cost = provider.estimatedCost(model: "gpt-4o-mini", promptTokens: 1_000_000, completionTokens: 1_000_000)
+        let cost = try XCTUnwrap(provider.estimatedCost(model: "gpt-4o-mini", promptTokens: 1_000_000, completionTokens: 1_000_000))
         XCTAssertEqual(cost, 0.15 + 0.6, accuracy: 0.0001)
     }
 
