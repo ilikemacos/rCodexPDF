@@ -6,8 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 ## [1.1.0] - 2026-07-13
 
 ### Added
-- **Auto-update**: the app checks for a new release automatically once a day (and always on manual "Check for Updates…" from the app menu or Preferences), shows an in-app sheet with release notes, and can download + install the update in place — including prompting for admin rights via the system dialog if `/Applications` isn't user-writable — then relaunches. A "Skip This Version" option persists per-version.
+- **Auto-update**: the app checks for a new release automatically once a day (and always on manual "Check for Updates…" from the app menu or Settings), shows an in-app sheet with release notes, and can download + install the update in place — including prompting for admin rights via the system dialog if `/Applications` isn't user-writable — then relaunches. A "Skip This Version" option persists per-version.
 - Update-checking logic (`UpdateChecker`) now lives in `RCodexPDFCore` and is shared by both the GUI's auto-updater and the CLI's `rcodexpdf update`, instead of being duplicated.
+- **In-window Settings tab**: replaces the old macOS Preferences window with a sidebar tab (⌘,) with pill-style sub-navigation — Appearance, AI Providers, General — matching the rest of the app.
+- **Interface language**: a real, working language picker (English, Español, Français, Deutsch, 日本語) that translates the sidebar and Settings screen via a key-based translation table (`RCodexPDFCore.Localization`); other screens currently remain English-only rather than showing a half-translated mix.
+- **Interface font size**: a Small/Medium/Large/XL picker that scales UI text app-wide via SwiftUI's Dynamic Type, separate from the code editor's own font size setting.
 
 ## [1.0.0] - 2026-07-13
 

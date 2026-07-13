@@ -46,6 +46,8 @@ public final class AppSettings: @unchecked Sendable {
         static let autoCheckForUpdates = "autoCheckForUpdates"
         static let lastUpdateCheckDate = "lastUpdateCheckDate"
         static let skippedUpdateVersion = "skippedUpdateVersion"
+        static let language = "language"
+        static let uiFontSizePreset = "uiFontSizePreset"
     }
 
     public var appearanceMode: AppearanceMode {
@@ -245,5 +247,35 @@ public final class AppSettings: @unchecked Sendable {
             lock.lock(); defer { lock.unlock() }
             defaults.set(newValue, forKey: Keys.skippedUpdateVersion)
         }
+    }
+
+    // MARK: - Localization & interface font size
+
+    public var language: AppLanguage {
+        get {
+            lock.lock(); defer { lock.unlock() }
+            return AppLanguage(rawValue: defaults.string(forKey: Keys.language) ?? "") ?? .en
+        }
+        set {
+            lock.lock(); defer { lock.unlock() }
+            defaults.set(newValue.rawValue, forKey: Keys.language)
+        }
+    }
+
+    public var uiFontSizePreset: UIFontSizePreset {
+        get {
+            lock.lock(); defer { lock.unlock() }
+            return UIFontSizePreset(rawValue: defaults.string(forKey: Keys.uiFontSizePreset) ?? "") ?? .medium
+        }
+        set {
+            lock.lock(); defer { lock.unlock() }
+            defaults.set(newValue.rawValue, forKey: Keys.uiFontSizePreset)
+        }
+    }
+
+    /// Convenience: looks up `key` in the current language. Equivalent to
+    /// `Localization.string(key, language: settings.language)`.
+    public func tr(_ key: String) -> String {
+        Localization.string(key, language: language)
     }
 }

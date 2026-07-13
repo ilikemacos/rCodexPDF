@@ -15,6 +15,8 @@ struct RootView: View {
                 EditorContainerView()
             case .chat:
                 ChatView()
+            case .settings:
+                SettingsContainerView()
             }
         }
         .navigationSplitViewStyle(.balanced)
@@ -45,17 +47,20 @@ struct RootView: View {
 
 struct SidebarView: View {
     @EnvironmentObject var appState: AppState
+    @ObservedObject private var holder = SettingsHolder.shared
+
+    private var mainSections: [SidebarSection] { [.pdf, .editor, .chat] }
 
     var body: some View {
         List(selection: $appState.selectedSection) {
-            Section("Workspace") {
-                ForEach(SidebarSection.allCases) { section in
-                    Label(section.rawValue, systemImage: section.symbol).tag(section)
+            Section(holder.tr("sidebar.workspace")) {
+                ForEach(mainSections) { section in
+                    Label(holder.tr(section.localizationKey), systemImage: section.symbol).tag(section)
                 }
             }
 
             if !appState.settings.recentPDFs().isEmpty {
-                Section("Recent PDFs") {
+                Section(holder.tr("sidebar.recentPDFs")) {
                     ForEach(appState.settings.recentPDFs().prefix(8), id: \.self) { url in
                         Button {
                             appState.openPDF(url: url)
@@ -68,7 +73,7 @@ struct SidebarView: View {
             }
 
             if !appState.settings.recentFiles().isEmpty {
-                Section("Recent Files") {
+                Section(holder.tr("sidebar.recentFiles")) {
                     ForEach(appState.settings.recentFiles().prefix(8), id: \.self) { url in
                         Button {
                             appState.openCodeFile(url: url)
@@ -78,6 +83,11 @@ struct SidebarView: View {
                         .buttonStyle(.plain)
                     }
                 }
+            }
+
+            Section {
+                Label(holder.tr(SidebarSection.settings.localizationKey), systemImage: SidebarSection.settings.symbol)
+                    .tag(SidebarSection.settings)
             }
         }
         .listStyle(.sidebar)

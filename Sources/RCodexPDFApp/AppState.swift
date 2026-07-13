@@ -3,16 +3,26 @@ import AppKit
 import RCodexPDFCore
 
 enum SidebarSection: String, CaseIterable, Identifiable {
-    case pdf = "PDF Viewer"
-    case editor = "Code Editor"
-    case chat = "AI Chat"
+    case pdf, editor, chat, settings
 
     var id: String { rawValue }
+
+    /// Key into `Localization` — the sidebar label is looked up via this, not a hardcoded string.
+    var localizationKey: String {
+        switch self {
+        case .pdf: return "sidebar.pdf"
+        case .editor: return "sidebar.editor"
+        case .chat: return "sidebar.chat"
+        case .settings: return "sidebar.settings"
+        }
+    }
+
     var symbol: String {
         switch self {
         case .pdf: return "doc.richtext"
         case .editor: return "chevron.left.forwardslash.chevron.right"
         case .chat: return "bubble.left.and.bubble.right"
+        case .settings: return "gearshape"
         }
     }
 }

@@ -4,12 +4,14 @@ import RCodexPDFCore
 @main
 struct RCodexPDFApp: App {
     @StateObject private var appState = AppState()
+    @ObservedObject private var settingsHolder = SettingsHolder.shared
 
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(appState)
                 .preferredColorScheme(colorScheme(for: appState.settings.appearanceMode))
+                .dynamicTypeSize(dynamicTypeSize(for: settingsHolder.uiFontSizePreset))
                 .onOpenURL { url in
                     appState.open(url: url)
                 }
@@ -19,6 +21,10 @@ struct RCodexPDFApp: App {
         }
         .windowToolbarStyle(.unified(showsTitle: true))
         .commands {
+            CommandGroup(replacing: .appSettings) {
+                Button("Settings…") { appState.selectedSection = .settings }
+                    .keyboardShortcut(",", modifiers: .command)
+            }
             CommandGroup(after: .appInfo) {
                 Button("Check for Updates…") {
                     Task { await appState.updateViewModel.checkManually() }
@@ -48,11 +54,6 @@ struct RCodexPDFApp: App {
                     .keyboardShortcut(".", modifiers: .command)
             }
         }
-
-        Settings {
-            PreferencesView()
-                .environmentObject(appState)
-        }
     }
 
     private func colorScheme(for mode: AppearanceMode) -> ColorScheme? {
@@ -60,6 +61,15 @@ struct RCodexPDFApp: App {
         case .system: return nil
         case .light: return .light
         case .dark: return .dark
+        }
+    }
+
+    private func dynamicTypeSize(for preset: UIFontSizePreset) -> DynamicTypeSize {
+        switch preset {
+        case .small: return .small
+        case .medium: return .medium
+        case .large: return .large
+        case .extraLarge: return .xLarge
         }
     }
 }

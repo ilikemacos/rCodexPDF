@@ -95,7 +95,8 @@ Sources/
     Views/PDF/                 PDF viewer, thumbnails, outline, search bar
     Views/Editor/               Code editor (NSTextView), syntax highlighter, minimap, build output
     Views/Chat/                 Chat UI, markdown renderer, conversation list
-    Views/Common/                Preferences, AI provider settings
+    Views/Settings/              In-window Settings tab (pill sub-nav, appearance, general)
+    Views/Common/                AI provider settings, update-available sheet
 
   rcodexpdf/                 # CLI (executable target "rcodexpdf", swift-argument-parser)
     Commands/                  open, pdf, compile, chat, config, update, uninstall

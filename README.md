@@ -51,6 +51,8 @@ Each release includes an **App ZIP** (with `rCodexPDF.app`), **PKG**, **DMG**, a
 - **AI chat** — bring your own key for **Claude, ChatGPT, Gemini, OpenRouter, Grok, Hermes, Llama**. Streaming responses, Markdown + syntax-highlighted code, conversation history with search, Markdown/JSON export & import, token/cost tracking. Keys live only in the macOS **Keychain**, never on disk.
 - **CLI** — `rcodexpdf` ships alongside the app: `open`, `pdf`, `compile`, `chat`, `config`, `update`, `uninstall`, colored output, Bash/Zsh completions.
 - **Auto-update** — the app checks GitHub Releases once a day (or on demand via **Check for Updates…**), and can download, install, and relaunch in place, prompting for admin rights only if needed.
+- **Settings tab** — an in-window Settings tab (⌘,), not a separate Preferences window: Appearance (light/dark, interface font size, language, editor theme/font), AI Providers (API keys), and General, in a pill-navigated layout.
+- **Language** — English, Español, Français, Deutsch, and 日本語 for the sidebar and Settings screen, via a real translation table (not yet app-wide — see Known limitations).
 
 ```
 rcodexpdf                       # launch the app
@@ -107,12 +109,13 @@ Requires Xcode 15+ or Command Line Tools with Swift 5.9+ (`xcode-select --instal
 - [SECURITY.md](SECURITY.md) — reporting vulnerabilities, API key handling
 - [CHANGELOG.md](CHANGELOG.md) — release history
 
-### Known limitations (v1.0.0)
+### Known limitations (v1.1.0)
 
 - No multi-file project/workspace support yet (single-file compile & run only)
 - Code completion is keyword + in-buffer-identifier based, not a full language server
 - Hermes and Llama have no single official hosted API; defaults point at OpenRouter/Groq and are user-configurable
 - Ad-hoc-signed builds trigger a one-time Gatekeeper warning unless a maintainer configures a Developer ID + notarization (see [BUILD.md](BUILD.md#signing--notarization))
+- The language picker translates the sidebar and Settings screen; the PDF viewer, editor, and chat UI are still English-only
 
 ---
 
