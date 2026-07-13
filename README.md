@@ -52,15 +52,15 @@ Colored output (disabled automatically when piped, or via `NO_COLOR=1`), `--help
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rcodexpdf/rCodexPDF/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash
 ```
 
-Or download a **DMG**, **PKG**, or **ZIP** from [Releases](https://github.com/rcodexpdf/rCodexPDF/releases). See [INSTALL.md](INSTALL.md) for details, updating, and uninstalling.
+Or download a **DMG**, **PKG**, or **ZIP** from [Releases](https://github.com/ilikemacos/rCodexPDF/releases). See [INSTALL.md](INSTALL.md) for details, updating, and uninstalling.
 
 ## Building from source
 
 ```bash
-git clone https://github.com/rcodexpdf/rCodexPDF.git
+git clone https://github.com/ilikemacos/rCodexPDF.git
 cd rCodexPDF
 swift build -c release
 ```

@@ -14,7 +14,7 @@ swift --version   # should report Swift 5.9 or later
 ## Quick build
 
 ```bash
-git clone https://github.com/rcodexpdf/rCodexPDF.git
+git clone https://github.com/ilikemacos/rCodexPDF.git
 cd rCodexPDF
 swift build -c release
 ```

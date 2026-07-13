@@ -2,7 +2,7 @@
 #
 # rCodexPDF installer.
 #
-#   curl -fsSL https://raw.githubusercontent.com/rcodexpdf/rCodexPDF/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash
 #
 # Installs rCodexPDF.app into /Applications and the `rcodexpdf` CLI onto your PATH.
 # Safe to re-run: it detects an existing install and updates it in place.
@@ -15,7 +15,7 @@
 #                      or, if that isn't writable, ~/.local/bin).
 set -euo pipefail
 
-REPO="rcodexpdf/rCodexPDF"
+REPO="ilikemacos/rCodexPDF"
 APP_NAME="rCodexPDF.app"
 APP_DEST="/Applications/$APP_NAME"
 

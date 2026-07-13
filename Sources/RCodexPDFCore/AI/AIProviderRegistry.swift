@@ -32,7 +32,7 @@ public enum AIProviderRegistry {
         defaultBaseURL: URL(string: "https://openrouter.ai/api/v1")!,
         pricingTable: [:],
         extraHeaders: [
-            "HTTP-Referer": "https://github.com/rcodexpdf/rCodexPDF",
+            "HTTP-Referer": "https://github.com/ilikemacos/rCodexPDF",
             "X-Title": "rCodexPDF"
         ]
     )

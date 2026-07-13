@@ -8,7 +8,7 @@
 ## Option 1: One-line installer (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rcodexpdf/rCodexPDF/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash
 ```
 
 This script:
@@ -30,7 +30,7 @@ curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
 
 ## Option 2: DMG
 
-1. Download `rCodexPDF-X.Y.Z.dmg` from [Releases](https://github.com/rcodexpdf/rCodexPDF/releases).
+1. Download `rCodexPDF-X.Y.Z.dmg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
 2. Open it and drag `rCodexPDF.app` to `Applications`.
 3. To also get the `rcodexpdf` CLI, launch the app once, or copy it out of the bundle:
    ```bash
@@ -39,7 +39,7 @@ curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
 
 ## Option 3: PKG
 
-1. Download `rCodexPDF-X.Y.Z.pkg` from [Releases](https://github.com/rcodexpdf/rCodexPDF/releases).
+1. Download `rCodexPDF-X.Y.Z.pkg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
 2. Double-click and follow the installer. This installs both the app **and** the CLI (with shell completions) in one step — no manual PATH setup needed.
 
 ## Option 4: ZIP
@@ -70,7 +70,7 @@ rcodexpdf uninstall --purge    # also removes chat history, settings, and Keycha
 ```
 or:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rcodexpdf/rCodexPDF/main/install.sh | bash -s -- --uninstall
+curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash -s -- --uninstall
 ```
 
 ## Troubleshooting
@@ -84,4 +84,4 @@ rCodexPDF shells out to your machine's own compilers/interpreters (clang, rustc,
 **AI chat says "No API key configured"**
 Open **Preferences → AI Providers** in the app (or run `rcodexpdf config set-key <provider>` in the terminal) and add a key for the provider you selected. Keys are stored in the macOS Keychain, never in a plain-text file.
 
-**Still stuck?** [Open an issue](https://github.com/rcodexpdf/rCodexPDF/issues) with your macOS version, chip, and `~/Library/Logs/rCodexPDF/rcodexpdf.log`.
+**Still stuck?** [Open an issue](https://github.com/ilikemacos/rCodexPDF/issues) with your macOS version, chip, and `~/Library/Logs/rCodexPDF/rcodexpdf.log`.

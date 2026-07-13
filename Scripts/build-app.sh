@@ -17,14 +17,14 @@ CODESIGN_IDENTITY="${CODESIGN_IDENTITY:--}"
 
 echo "==> Building rCodexPDF v$VERSION"
 
-ARCH_FLAGS=(--arch arm64 --arch x86_64)
 if [[ "${SKIP_UNIVERSAL:-0}" == "1" ]]; then
-  ARCH_FLAGS=()
   echo "==> SKIP_UNIVERSAL set: building for host architecture only"
+  echo "==> swift build -c release"
+  swift build -c release
+else
+  echo "==> swift build -c release --arch arm64 --arch x86_64"
+  swift build -c release --arch arm64 --arch x86_64
 fi
-
-echo "==> swift build -c release ${ARCH_FLAGS[*]}"
-swift build -c release "${ARCH_FLAGS[@]}"
 
 if [[ "${SKIP_UNIVERSAL:-0}" == "1" ]]; then
   BIN_DIR=".build/release"
