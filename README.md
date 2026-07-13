@@ -50,6 +50,7 @@ Each release includes an **App ZIP** (with `rCodexPDF.app`), **PKG**, **DMG**, a
 - **Code editor & compiler** — syntax highlighting, line numbers, bracket matching, code folding, minimap, keyword/identifier autocomplete, find & replace, multi-tab, auto-save, on-demand formatting. Compiles & runs **C, C++, Rust, Go, Python, Java, JavaScript, TypeScript, Swift, Kotlin, C#, PHP, Ruby, Bash** using your machine's own toolchains — live build output, parsed diagnostics, Run/Stop. (No Lua, by design.)
 - **AI chat** — bring your own key for **Claude, ChatGPT, Gemini, OpenRouter, Grok, Hermes, Llama**. Streaming responses, Markdown + syntax-highlighted code, conversation history with search, Markdown/JSON export & import, token/cost tracking. Keys live only in the macOS **Keychain**, never on disk.
 - **CLI** — `rcodexpdf` ships alongside the app: `open`, `pdf`, `compile`, `chat`, `config`, `update`, `uninstall`, colored output, Bash/Zsh completions.
+- **Auto-update** — the app checks GitHub Releases once a day (or on demand via **Check for Updates…**), and can download, install, and relaunch in place, prompting for admin rights only if needed.
 
 ```
 rcodexpdf                       # launch the app
@@ -77,7 +78,7 @@ This repository contains the full rCodexPDF source tree — a plain Swift Packag
 
 | Path | What it is |
 |------|------------|
-| `Sources/RCodexPDFCore/` | Shared core: Settings, Storage, Logging, PDF engine, Compiler engine, 7 AI providers, Keychain |
+| `Sources/RCodexPDFCore/` | Shared core: Settings, Storage, Logging, PDF engine, Compiler engine, 7 AI providers, Keychain, auto-updater |
 | `Sources/RCodexPDFApp/` | The SwiftUI + AppKit GUI app |
 | `Sources/rcodexpdf/` | The CLI (swift-argument-parser) |
 | `Tests/` | Unit tests for both |

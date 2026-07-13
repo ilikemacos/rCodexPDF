@@ -3,6 +3,12 @@
 All notable changes to rCodexPDF are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project uses [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-07-13
+
+### Added
+- **Auto-update**: the app checks for a new release automatically once a day (and always on manual "Check for Updates…" from the app menu or Preferences), shows an in-app sheet with release notes, and can download + install the update in place — including prompting for admin rights via the system dialog if `/Applications` isn't user-writable — then relaunches. A "Skip This Version" option persists per-version.
+- Update-checking logic (`UpdateChecker`) now lives in `RCodexPDFCore` and is shared by both the GUI's auto-updater and the CLI's `rcodexpdf update`, instead of being duplicated.
+
 ## [1.0.0] - 2026-07-13
 
 ### Added

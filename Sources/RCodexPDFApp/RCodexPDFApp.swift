@@ -19,6 +19,11 @@ struct RCodexPDFApp: App {
         }
         .windowToolbarStyle(.unified(showsTitle: true))
         .commands {
+            CommandGroup(after: .appInfo) {
+                Button("Check for Updates…") {
+                    Task { await appState.updateViewModel.checkManually() }
+                }
+            }
             CommandGroup(replacing: .newItem) {
                 Button("Open PDF…") { appState.presentOpenPDFPanel() }
                     .keyboardShortcut("o", modifiers: .command)

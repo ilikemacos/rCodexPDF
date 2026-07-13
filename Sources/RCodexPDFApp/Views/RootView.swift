@@ -22,6 +22,12 @@ struct RootView: View {
         .onDrop(of: [.fileURL], isTargeted: nil) { providers in
             handleDrop(providers: providers)
         }
+        .sheet(isPresented: $appState.updateViewModel.isPresented) {
+            UpdateSheet(viewModel: appState.updateViewModel)
+        }
+        .task {
+            await appState.updateViewModel.checkOnLaunchIfDue()
+        }
     }
 
     private func handleDrop(providers: [NSItemProvider]) -> Bool {

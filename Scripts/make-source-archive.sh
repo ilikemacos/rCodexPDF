@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-VERSION="$(grep -o '"[0-9]*\.[0-9]*\.[0-9]*"' Sources/rcodexpdf/Support/Version.swift | tr -d '"' | head -1)"
+VERSION="$(grep -o '"[0-9]*\.[0-9]*\.[0-9]*"' Sources/RCodexPDFCore/Models/RCodexPDFVersion.swift | tr -d '"' | head -1)"
 OUT="dist/rCodexPDF-$VERSION-source.tar.gz"
 
 mkdir -p dist

@@ -43,6 +43,9 @@ public final class AppSettings: @unchecked Sendable {
         static let telemetryOptIn = "telemetryOptIn"
         static let providerBaseURLOverrides = "providerBaseURLOverrides"
         static let providerModelSelection = "providerModelSelection"
+        static let autoCheckForUpdates = "autoCheckForUpdates"
+        static let lastUpdateCheckDate = "lastUpdateCheckDate"
+        static let skippedUpdateVersion = "skippedUpdateVersion"
     }
 
     public var appearanceMode: AppearanceMode {
@@ -204,5 +207,43 @@ public final class AppSettings: @unchecked Sendable {
         var map = defaults.dictionary(forKey: Keys.providerModelSelection) as? [String: String] ?? [:]
         map[id] = model
         defaults.set(map, forKey: Keys.providerModelSelection)
+    }
+
+    // MARK: - Auto-update
+
+    public var autoCheckForUpdates: Bool {
+        get {
+            lock.lock(); defer { lock.unlock() }
+            if defaults.object(forKey: Keys.autoCheckForUpdates) == nil { return true }
+            return defaults.bool(forKey: Keys.autoCheckForUpdates)
+        }
+        set {
+            lock.lock(); defer { lock.unlock() }
+            defaults.set(newValue, forKey: Keys.autoCheckForUpdates)
+        }
+    }
+
+    public var lastUpdateCheckDate: Date? {
+        get {
+            lock.lock(); defer { lock.unlock() }
+            return defaults.object(forKey: Keys.lastUpdateCheckDate) as? Date
+        }
+        set {
+            lock.lock(); defer { lock.unlock() }
+            defaults.set(newValue, forKey: Keys.lastUpdateCheckDate)
+        }
+    }
+
+    /// A version the user chose to skip notifications for (via "Skip This Version"). Cleared once
+    /// a newer version than this comes out, since that's an update they haven't been asked about.
+    public var skippedUpdateVersion: String? {
+        get {
+            lock.lock(); defer { lock.unlock() }
+            return defaults.string(forKey: Keys.skippedUpdateVersion)
+        }
+        set {
+            lock.lock(); defer { lock.unlock() }
+            defaults.set(newValue, forKey: Keys.skippedUpdateVersion)
+        }
     }
 }

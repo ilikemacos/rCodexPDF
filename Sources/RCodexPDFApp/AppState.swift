@@ -28,6 +28,7 @@ final class AppState: ObservableObject {
     @Published var activeCodeFileID: UUID?
 
     @Published var chatViewModel = ChatViewModel()
+    @Published var updateViewModel = UpdateViewModel()
 
     let settings = AppSettings.shared
 

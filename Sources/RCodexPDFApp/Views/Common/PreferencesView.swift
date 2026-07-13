@@ -16,6 +16,7 @@ struct PreferencesView: View {
 }
 
 struct GeneralPreferencesView: View {
+    @EnvironmentObject var appState: AppState
     @ObservedObject var settingsHolder = SettingsHolder.shared
 
     var body: some View {
@@ -25,6 +26,10 @@ struct GeneralPreferencesView: View {
             }
             Toggle("Remember last opened PDF page", isOn: $settingsHolder.pdfRememberLastPage)
             Toggle("Colored CLI output", isOn: $settingsHolder.cliColorOutput)
+            Toggle("Automatically check for updates", isOn: $settingsHolder.autoCheckForUpdates)
+            Button("Check for Updates Now…") {
+                Task { await appState.updateViewModel.checkManually() }
+            }
         }
         .padding(20)
     }
@@ -72,6 +77,9 @@ final class SettingsHolder: ObservableObject {
     @Published var cliColorOutput: Bool {
         didSet { settings.cliColorOutput = cliColorOutput }
     }
+    @Published var autoCheckForUpdates: Bool {
+        didSet { settings.autoCheckForUpdates = autoCheckForUpdates }
+    }
 
     private init() {
         appearanceMode = settings.appearanceMode
@@ -80,5 +88,6 @@ final class SettingsHolder: ObservableObject {
         autoSaveEnabled = settings.autoSaveEnabled
         pdfRememberLastPage = settings.pdfRememberLastPage
         cliColorOutput = settings.cliColorOutput
+        autoCheckForUpdates = settings.autoCheckForUpdates
     }
 }

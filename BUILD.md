@@ -85,7 +85,9 @@ Sources/
     AI/                       AIProvider protocol, KeychainStore, 7 provider implementations,
                                AIProviderRegistry, ChatController
     Networking/                SSEClient (Server-Sent-Events streaming)
-    Models/                    Chat message/conversation models
+    Models/                    Chat message/conversation models, app version constant
+    Update/                    UpdateChecker (GitHub release/semver check), AutoUpdater
+                               (download, install, relaunch) — shared by the app and the CLI
 
   RCodexPDFApp/              # SwiftUI + AppKit GUI application (executable target "RCodexPDF")
     AppState.swift             Top-level app state / navigation
