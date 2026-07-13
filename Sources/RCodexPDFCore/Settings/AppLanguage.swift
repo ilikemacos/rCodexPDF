@@ -3,7 +3,7 @@ import Foundation
 /// Supported interface languages. Adding a language means adding one case here and one
 /// dictionary in `Localization.strings` — nothing else has to change.
 public enum AppLanguage: String, Codable, CaseIterable, Sendable, Identifiable {
-    case en, es, fr, de, ja
+    case en, es, fr, de, ja, zhHant
 
     public var id: String { rawValue }
 
@@ -14,6 +14,7 @@ public enum AppLanguage: String, Codable, CaseIterable, Sendable, Identifiable {
         case .fr: return "Français"
         case .de: return "Deutsch"
         case .ja: return "日本語"
+        case .zhHant: return "繁體中文"
         }
     }
 }
