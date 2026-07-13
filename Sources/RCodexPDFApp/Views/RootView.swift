@@ -48,6 +48,7 @@ struct RootView: View {
 struct SidebarView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject private var holder = SettingsHolder.shared
+    @Environment(\.uiFontScale) private var fontScale
 
     private var mainSections: [SidebarSection] { [.pdf, .editor, .chat] }
 
@@ -55,7 +56,9 @@ struct SidebarView: View {
         List(selection: $appState.selectedSection) {
             Section(holder.tr("sidebar.workspace")) {
                 ForEach(mainSections) { section in
-                    Label(holder.tr(section.localizationKey), systemImage: section.symbol).tag(section)
+                    Label(holder.tr(section.localizationKey), systemImage: section.symbol)
+                        .font(.system(size: 13 * fontScale))
+                        .tag(section)
                 }
             }
 
@@ -87,6 +90,7 @@ struct SidebarView: View {
 
             Section {
                 Label(holder.tr(SidebarSection.settings.localizationKey), systemImage: SidebarSection.settings.symbol)
+                    .font(.system(size: 13 * fontScale))
                     .tag(SidebarSection.settings)
             }
         }

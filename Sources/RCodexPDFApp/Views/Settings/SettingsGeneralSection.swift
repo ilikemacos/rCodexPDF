@@ -4,6 +4,7 @@ import RCodexPDFCore
 struct SettingsGeneralSection: View {
     @ObservedObject var holder: SettingsHolder
     @EnvironmentObject var appState: AppState
+    @Environment(\.uiFontScale) private var fontScale
 
     var body: some View {
         ScrollView {
@@ -20,6 +21,7 @@ struct SettingsGeneralSection: View {
                 }
                 .disabled(appState.updateViewModel.isChecking)
             }
+            .font(.system(size: 12 * fontScale))
             .padding(20)
         }
     }

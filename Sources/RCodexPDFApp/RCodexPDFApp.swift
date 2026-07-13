@@ -11,7 +11,7 @@ struct RCodexPDFApp: App {
             RootView()
                 .environmentObject(appState)
                 .preferredColorScheme(colorScheme(for: appState.settings.appearanceMode))
-                .dynamicTypeSize(dynamicTypeSize(for: settingsHolder.uiFontSizePreset))
+                .environment(\.uiFontScale, settingsHolder.uiFontSizePreset.scale)
                 .onOpenURL { url in
                     appState.open(url: url)
                 }
@@ -61,15 +61,6 @@ struct RCodexPDFApp: App {
         case .system: return nil
         case .light: return .light
         case .dark: return .dark
-        }
-    }
-
-    private func dynamicTypeSize(for preset: UIFontSizePreset) -> DynamicTypeSize {
-        switch preset {
-        case .small: return .small
-        case .medium: return .medium
-        case .large: return .large
-        case .extraLarge: return .xLarge
         }
     }
 }

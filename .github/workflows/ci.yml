@@ -76,8 +76,37 @@ jobs:
           test -x "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf"
           echo "Bundle structure OK"
       - name: Smoke-test CLI
-        timeout-minutes: 2
+        timeout-minutes: 3
         run: |
+          # Occasionally the very first exec of a freshly-built ad-hoc-signed binary on a clean
+          # runner stalls (macOS first-launch code-signing/AMFI assessment) — self-heal with a
+          # few short-timeout retries instead of burning the whole job on one hung attempt.
           CLI="dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf"
-          "$CLI" --help < /dev/null
-          "$CLI" --version < /dev/null
+
+          run_with_timeout() {
+            local secs="$1"; shift
+            "$@" < /dev/null &
+            local pid=$!
+            ( sleep "$secs" && kill -9 "$pid" 2>/dev/null ) &
+            local watcher=$!
+            wait "$pid" 2>/dev/null
+            local status=$?
+            kill "$watcher" 2>/dev/null
+            wait "$watcher" 2>/dev/null
+            return $status
+          }
+
+          attempt_cli() {
+            local tries=3
+            for i in $(seq 1 $tries); do
+              echo "Attempt $i/$tries: $*"
+              if run_with_timeout 25 "$CLI" "$@"; then
+                return 0
+              fi
+              echo "Attempt $i timed out or failed; retrying…"
+            done
+            return 1
+          }
+
+          attempt_cli --help
+          attempt_cli --version

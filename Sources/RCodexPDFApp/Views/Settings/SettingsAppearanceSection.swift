@@ -3,6 +3,7 @@ import RCodexPDFCore
 
 struct SettingsAppearanceSection: View {
     @ObservedObject var holder: SettingsHolder
+    @Environment(\.uiFontScale) private var fontScale
 
     var body: some View {
         ScrollView {
@@ -69,8 +70,9 @@ struct SettingsAppearanceSection: View {
     @ViewBuilder
     private func labeledSection<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title).font(.callout.weight(.semibold))
+            Text(title).font(.system(size: 12 * fontScale, weight: .semibold))
             content()
         }
+        .font(.system(size: 12 * fontScale))
     }
 }

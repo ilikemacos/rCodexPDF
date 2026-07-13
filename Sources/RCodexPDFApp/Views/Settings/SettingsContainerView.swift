@@ -28,15 +28,16 @@ enum SettingsSection: String, CaseIterable, Identifiable {
 /// same style as the rest of the app's tabs (rather than a separate macOS Preferences window).
 struct SettingsContainerView: View {
     @ObservedObject private var holder = SettingsHolder.shared
+    @Environment(\.uiFontScale) private var fontScale
     @State private var section: SettingsSection = .appearance
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(holder.tr("settings.title"))
-                    .font(.title2.bold())
+                    .font(.system(size: 17 * fontScale, weight: .bold))
                 Text(holder.tr("settings.subtitle"))
-                    .font(.callout)
+                    .font(.system(size: 12 * fontScale))
                     .foregroundStyle(.secondary)
             }
             .padding(.horizontal, 20)
@@ -49,7 +50,8 @@ struct SettingsContainerView: View {
                         SettingsPillButton(
                             title: candidate.label(holder),
                             icon: candidate.icon,
-                            isSelected: section == candidate
+                            isSelected: section == candidate,
+                            fontScale: fontScale
                         ) {
                             section = candidate
                         }
@@ -78,13 +80,14 @@ private struct SettingsPillButton: View {
     let title: String
     let icon: String
     let isSelected: Bool
+    let fontScale: CGFloat
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             HStack(spacing: 5) {
-                Image(systemName: icon).font(.system(size: 11, weight: .semibold))
-                Text(title).font(.callout.weight(isSelected ? .semibold : .regular))
+                Image(systemName: icon).font(.system(size: 11 * fontScale, weight: .semibold))
+                Text(title).font(.system(size: 12 * fontScale, weight: isSelected ? .semibold : .regular))
             }
             .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
             .padding(.horizontal, 12)
