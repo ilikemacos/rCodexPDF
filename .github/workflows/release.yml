@@ -9,6 +9,7 @@ jobs:
   release:
     name: Build & publish release artifacts
     runs-on: macos-15
+    timeout-minutes: 30
     permissions:
       contents: write
     steps:

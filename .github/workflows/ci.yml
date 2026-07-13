@@ -14,6 +14,7 @@ jobs:
   build-and-test:
     name: Build & Test (macOS)
     runs-on: macos-15
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -43,6 +44,7 @@ jobs:
   lint-shell-scripts:
     name: Shellcheck installer & packaging scripts
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: Install shellcheck
@@ -56,6 +58,7 @@ jobs:
     name: Build .app bundle (smoke test)
     runs-on: macos-15
     needs: build-and-test
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - name: Select Xcode
@@ -73,6 +76,8 @@ jobs:
           test -x "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf"
           echo "Bundle structure OK"
       - name: Smoke-test CLI
+        timeout-minutes: 2
         run: |
-          "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf" --help
-          "dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf" --version
+          CLI="dist/rCodexPDF.app/Contents/Resources/bin/rcodexpdf"
+          "$CLI" --help < /dev/null
+          "$CLI" --version < /dev/null

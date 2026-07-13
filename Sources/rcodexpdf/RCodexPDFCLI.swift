@@ -4,12 +4,17 @@ import RCodexPDFCore
 
 @main
 struct RCodexPDFCLI: AsyncParsableCommand {
+    // NOTE: `discussion` (like the rest of `configuration`) is evaluated at static
+    // type-initialization time, before ArgumentParser even parses arguments — so it must be a
+    // plain constant with no I/O side effects. It used to call into ANSI/AppSettings (which
+    // touches UserDefaults/cfprefsd), which could stall `rcodexpdf --help` on a machine where
+    // that first preferences access is slow (observed hanging on a fresh CI runner).
     static let configuration = CommandConfiguration(
         commandName: "rcodexpdf",
         abstract: "rCodexPDF — PDF viewer, code editor/compiler, and AI chat assistant for macOS.",
         discussion: """
-        Running \(ANSIHelp.bold("rcodexpdf")) with no arguments launches the rCodexPDF app.
-        Run \(ANSIHelp.bold("rcodexpdf <command> --help")) for details on a specific command.
+        Running "rcodexpdf" with no arguments launches the rCodexPDF app.
+        Run "rcodexpdf <command> --help" for details on a specific command.
         """,
         version: RCodexPDFVersion.current,
         subcommands: [
@@ -32,8 +37,4 @@ struct RCodexPDFCLI: AsyncParsableCommand {
             throw ExitCode.failure
         }
     }
-}
-
-enum ANSIHelp {
-    static func bold(_ s: String) -> String { ANSI.bold(s) }
 }
