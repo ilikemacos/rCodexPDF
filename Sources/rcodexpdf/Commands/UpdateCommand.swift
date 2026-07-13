@@ -26,8 +26,8 @@ struct UpdateCommand: AsyncParsableCommand {
     @Flag(name: .long, help: "Skip the confirmation prompt and install immediately.")
     var yes = false
 
-    static let releasesAPIURL = URL(string: "https://api.github.com/repos/ilikemacos/rCodexPDF/releases/latest")!
-    static let installScriptURL = "https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh"
+    static let releasesAPIURL = URL(string: "https://api.github.com/repos/chopsticks/rCodexPDF/releases/latest")!
+    static let installScriptURL = "https://raw.githubusercontent.com/chopsticks/rCodexPDF/main/install.sh"
 
     func run() async throws {
         CLIOutput.info("Checking for updates… (current version \(RCodexPDFVersion.current))")

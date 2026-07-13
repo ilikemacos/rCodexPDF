@@ -2,22 +2,22 @@
 
 > All-in-one macOS app: a fast native PDF viewer, a code editor with real compile/run for 14 languages, and a multi-provider AI chat assistant. Open source, no account, API keys stay in your Keychain.
 
-**[→ Releases](https://github.com/ilikemacos/rCodexPDF/releases)**
+**[→ Releases](https://github.com/chopsticks/rCodexPDF/releases)**
 
 ### Quick install (Terminal)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/chopsticks/rCodexPDF/main/install.sh | bash
 ```
 
 ### Homebrew
 
 ```bash
-brew tap ilikemacos/rcodexpdf
+brew tap chopsticks/rcodexpdf
 brew install rcodexpdf
 ```
 
-If Homebrew reports permission errors on `/opt/homebrew`, run `sudo chown -R "$(whoami)" /opt/homebrew/Cellar /opt/homebrew/Library` and try again. Or use the [install script](https://github.com/ilikemacos/homebrew-rcodexpdf/blob/main/install.sh) (same result, no Homebrew).
+If Homebrew reports permission errors on `/opt/homebrew`, run `sudo chown -R "$(whoami)" /opt/homebrew/Cellar /opt/homebrew/Library` and try again. Or use the [install script](https://github.com/chopsticks/homebrew-rcodexpdf/blob/main/install.sh) (same result, no Homebrew).
 
 ---
 
@@ -29,12 +29,12 @@ Each release includes an **App ZIP** (with `rCodexPDF.app`), **PKG**, **DMG**, a
 
 | Format | File |
 |--------|------|
-| **App ZIP** | [rCodexPDF-1.0.0-macOS.zip](https://github.com/ilikemacos/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-macOS.zip) |
-| **PKG** | [rCodexPDF-1.0.0.pkg](https://github.com/ilikemacos/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.pkg) |
-| **DMG** | [rCodexPDF-1.0.0.dmg](https://github.com/ilikemacos/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.dmg) |
-| **Source** | [rCodexPDF-1.0.0-source.tar.gz](https://github.com/ilikemacos/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-source.tar.gz) |
+| **App ZIP** | [rCodexPDF-1.0.0-macOS.zip](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-macOS.zip) |
+| **PKG** | [rCodexPDF-1.0.0.pkg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.pkg) |
+| **DMG** | [rCodexPDF-1.0.0.dmg](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0.dmg) |
+| **Source** | [rCodexPDF-1.0.0-source.tar.gz](https://github.com/chopsticks/rCodexPDF/releases/download/v1.0.0/rCodexPDF-1.0.0-source.tar.gz) |
 
-[All releases →](https://github.com/ilikemacos/rCodexPDF/releases)
+[All releases →](https://github.com/chopsticks/rCodexPDF/releases)
 
 ### Install from App ZIP
 
@@ -86,12 +86,12 @@ This repository contains the full rCodexPDF source tree — a plain Swift Packag
 | `install.sh` | One-line installer (this repo's `main` branch) |
 | `.github/workflows/` | CI (build+test+shellcheck) and tag-triggered release (DMG/PKG/ZIP/source archive) |
 
-The Homebrew tap lives at [ilikemacos/homebrew-rcodexpdf](https://github.com/ilikemacos/homebrew-rcodexpdf). Pre-built `.zip`, `.pkg`, and `.dmg` files are published on [GitHub Releases](https://github.com/ilikemacos/rCodexPDF/releases), not committed here.
+The Homebrew tap lives at [chopsticks/homebrew-rcodexpdf](https://github.com/chopsticks/homebrew-rcodexpdf). Pre-built `.zip`, `.pkg`, and `.dmg` files are published on [GitHub Releases](https://github.com/chopsticks/rCodexPDF/releases), not committed here.
 
 ### Build from source (macOS)
 
 ```bash
-git clone https://github.com/ilikemacos/rCodexPDF.git
+git clone https://github.com/chopsticks/rCodexPDF.git
 cd rCodexPDF
 swift build -c release
 ```

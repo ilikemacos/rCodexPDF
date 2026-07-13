@@ -8,7 +8,7 @@
 ## Option 1: One-line installer (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/chopsticks/rCodexPDF/main/install.sh | bash
 ```
 
 This script:
@@ -31,15 +31,15 @@ curl -fsSL .../install.sh | bash -s -- --uninstall        # remove rCodexPDF
 ## Option 2: Homebrew
 
 ```bash
-brew tap ilikemacos/rcodexpdf
+brew tap chopsticks/rcodexpdf
 brew install rcodexpdf
 ```
 
-Installs `rCodexPDF.app` (to `/Applications` or `~/Applications`) and the real `rcodexpdf` CLI with shell completions. If Homebrew reports a permission error on `/opt/homebrew`, run `sudo chown -R "$(whoami)" /opt/homebrew/Cellar /opt/homebrew/Library` and retry, or use the tap's [install.sh](https://github.com/ilikemacos/homebrew-rcodexpdf/blob/main/install.sh) instead (same result, no Homebrew required).
+Installs `rCodexPDF.app` (to `/Applications` or `~/Applications`) and the real `rcodexpdf` CLI with shell completions. If Homebrew reports a permission error on `/opt/homebrew`, run `sudo chown -R "$(whoami)" /opt/homebrew/Cellar /opt/homebrew/Library` and retry, or use the tap's [install.sh](https://github.com/chopsticks/homebrew-rcodexpdf/blob/main/install.sh) instead (same result, no Homebrew required).
 
 ## Option 3: DMG
 
-1. Download `rCodexPDF-X.Y.Z.dmg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
+1. Download `rCodexPDF-X.Y.Z.dmg` from [Releases](https://github.com/chopsticks/rCodexPDF/releases).
 2. Open it and drag `rCodexPDF.app` to `Applications`.
 3. To also get the `rcodexpdf` CLI, launch the app once, or copy it out of the bundle:
    ```bash
@@ -48,7 +48,7 @@ Installs `rCodexPDF.app` (to `/Applications` or `~/Applications`) and the real `
 
 ## Option 4: PKG
 
-1. Download `rCodexPDF-X.Y.Z.pkg` from [Releases](https://github.com/ilikemacos/rCodexPDF/releases).
+1. Download `rCodexPDF-X.Y.Z.pkg` from [Releases](https://github.com/chopsticks/rCodexPDF/releases).
 2. Double-click and follow the installer. This installs both the app **and** the CLI (with shell completions) in one step — no manual PATH setup needed.
 
 ## Option 5: ZIP
@@ -79,7 +79,7 @@ rcodexpdf uninstall --purge    # also removes chat history, settings, and Keycha
 ```
 or:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ilikemacos/rCodexPDF/main/install.sh | bash -s -- --uninstall
+curl -fsSL https://raw.githubusercontent.com/chopsticks/rCodexPDF/main/install.sh | bash -s -- --uninstall
 ```
 
 ## Troubleshooting
@@ -93,4 +93,4 @@ rCodexPDF shells out to your machine's own compilers/interpreters (clang, rustc,
 **AI chat says "No API key configured"**
 Open **Preferences → AI Providers** in the app (or run `rcodexpdf config set-key <provider>` in the terminal) and add a key for the provider you selected. Keys are stored in the macOS Keychain, never in a plain-text file.
 
-**Still stuck?** [Open an issue](https://github.com/ilikemacos/rCodexPDF/issues) with your macOS version, chip, and `~/Library/Logs/rCodexPDF/rcodexpdf.log`.
+**Still stuck?** [Open an issue](https://github.com/chopsticks/rCodexPDF/issues) with your macOS version, chip, and `~/Library/Logs/rCodexPDF/rcodexpdf.log`.

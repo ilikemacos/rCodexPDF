@@ -12,7 +12,7 @@ Thanks for considering a contribution! rCodexPDF is a community-driven, MIT-lice
 
 See [BUILD.md](BUILD.md) for building the project. In short:
 ```bash
-git clone https://github.com/ilikemacos/rCodexPDF.git
+git clone https://github.com/chopsticks/rCodexPDF.git
 cd rCodexPDF
 swift build
 swift test

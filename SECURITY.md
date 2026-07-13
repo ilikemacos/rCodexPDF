@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in rCodexPDF, please **do not open a public GitHub issue**. Instead:
 
-- Use GitHub's [private vulnerability reporting](https://github.com/ilikemacos/rCodexPDF/security/advisories/new) for this repository, or
+- Use GitHub's [private vulnerability reporting](https://github.com/chopsticks/rCodexPDF/security/advisories/new) for this repository, or
 - Email the maintainers (see the repository's GitHub profile for contact info) with details.
 
 Please include:
