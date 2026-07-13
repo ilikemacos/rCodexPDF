@@ -43,10 +43,10 @@ struct ChatConversationView: View {
                     }
                     .padding()
                 }
-                .onChange(of: viewModel.streamingText) { _, _ in
+                .onChange(of: viewModel.streamingText) { _ in
                     withAnimation { proxy.scrollTo("streaming", anchor: .bottom) }
                 }
-                .onChange(of: viewModel.activeConversation?.messages.count) { _, _ in
+                .onChange(of: viewModel.activeConversation?.messages.count) { _ in
                     if let last = viewModel.activeConversation?.messages.last {
                         withAnimation { proxy.scrollTo(last.id, anchor: .bottom) }
                     }

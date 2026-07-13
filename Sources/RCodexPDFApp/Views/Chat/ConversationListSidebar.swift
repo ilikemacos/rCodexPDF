@@ -10,7 +10,7 @@ struct ConversationListSidebar: View {
             HStack {
                 TextField("Search conversations", text: $viewModel.searchQuery)
                     .textFieldStyle(.roundedBorder)
-                    .onChange(of: viewModel.searchQuery) { _, _ in viewModel.loadConversations() }
+                    .onChange(of: viewModel.searchQuery) { _ in viewModel.loadConversations() }
                 Button { viewModel.startNewConversation() } label: { Image(systemName: "square.and.pencil") }
                     .buttonStyle(.plain)
                     .help("New conversation")

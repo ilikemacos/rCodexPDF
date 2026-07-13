@@ -11,7 +11,7 @@ struct PDFSearchBar: View {
                 .textFieldStyle(.plain)
                 .focused($isFocused)
                 .onSubmit { doc.performSearch() }
-                .onChange(of: doc.searchQuery) { _, _ in doc.performSearch() }
+                .onChange(of: doc.searchQuery) { _ in doc.performSearch() }
 
             if !doc.searchResults.isEmpty {
                 Text("\(doc.currentSearchIndex + 1) of \(doc.searchResults.count)")

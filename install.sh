@@ -18,7 +18,6 @@ set -euo pipefail
 REPO="rcodexpdf/rCodexPDF"
 APP_NAME="rCodexPDF.app"
 APP_DEST="/Applications/$APP_NAME"
-RAW_BASE="https://raw.githubusercontent.com/$REPO/main"
 
 # ---------- output helpers ----------------------------------------------------------------
 if [[ -t 1 ]] && [[ "${NO_COLOR:-}" == "" ]]; then

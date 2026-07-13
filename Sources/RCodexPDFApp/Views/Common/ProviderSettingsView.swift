@@ -75,7 +75,7 @@ private struct ProviderDetailView: View {
         }
         .padding(20)
         .onAppear(perform: load)
-        .onChange(of: provider.id) { _, _ in load() }
+        .onChange(of: provider.id) { _ in load() }
     }
 
     private func load() {
