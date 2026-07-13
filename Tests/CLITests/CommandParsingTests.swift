@@ -1,5 +1,6 @@
 import XCTest
 import ArgumentParser
+import RCodexPDFCore
 @testable import rcodexpdf
 
 final class CommandParsingTests: XCTestCase {
