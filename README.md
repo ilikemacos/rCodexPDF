@@ -52,7 +52,7 @@ Each release includes an **App ZIP** (with `rCodexPDF.app`), **PKG**, **DMG**, a
 - **CLI** — `rcodexpdf` ships alongside the app: `open`, `pdf`, `compile`, `chat`, `config`, `update`, `uninstall`, colored output, Bash/Zsh completions.
 - **Auto-update** — the app checks GitHub Releases once a day (or on demand via **Check for Updates…**), and can download, install, and relaunch in place, prompting for admin rights only if needed.
 - **Settings tab** — an in-window Settings tab (⌘,), not a separate Preferences window: Appearance (light/dark, interface font size, language, editor theme/font), AI Providers (API keys), and General, in a pill-navigated layout.
-- **Language** — English, Español, Français, Deutsch, and 日本語 for the sidebar and Settings screen, via a real translation table (not yet app-wide — see Known limitations).
+- **Language** — English, Español, Français, Deutsch, 日本語, and 繁體中文 for the sidebar and Settings screen, via a real translation table (not yet app-wide — see Known limitations).
 
 ```
 rcodexpdf                       # launch the app
